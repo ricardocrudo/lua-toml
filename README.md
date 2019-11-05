@@ -1,40 +1,20 @@
-# toml.lua
+# lua-toml-redis
 
-<img src="https://travis-ci.org/jonstoler/lua-toml.svg" />
-
-Use [toml](https://github.com/toml-lang/toml) with lua!
-
-Latest supported version: 0.4.0  
-Current lua-toml version: 2.0.0
+This project is a fork of [lua-toml](https://github.com/jonstoler/lua-toml) which was modified to
+read a toml file and export the contents to [redis](https://redis.io/).
 
 # Usage
 
-	TOML = require "toml"
-	TOML.parse(string)
-	tomlOut = TOML.encode(table)
+	redis-cli --eval toml-redis.lua , "`cat /path/to/file.toml`"
+    redis-cli --eval toml-redis.lua , "`cat /path/to/file.toml`" "mykey"
 
-To enable more lua-friendly features (like mixed arrays):
-
-	TOML.strict = false
-
-or:
-
-	TOML.parse(string, {strict = false})
-
-<span></span>
-
-> Note: For the moment, dates are *not* supported, since there is no simple way to serialize them in lua.
+In the first example a hash named **settings** is created and the contents of the TOML file are
+created as fields of that hash. In the second command above, the behavior is the same but the
+contents are added to **mykey** instead.
 
 # License
 
-lua-toml is licensed under [MIT](https://opensource.org/licenses/MIT).
+lua-toml is licensed under [MIT](https://opensource.org/licenses/MIT) and written by Jonathan
+Stoler.
 
-```
-Copyright (c) 2017 Jonathan Stoler
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-```
+lua-toml-redis is licensed under [MIT](https://opensource.org/licenses/MIT).
